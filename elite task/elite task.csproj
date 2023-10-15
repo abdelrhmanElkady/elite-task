@@ -4626,6 +4626,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="main\template\BillItem.cs" />
     <Compile Include="main\template\invoice-create.aspx.cs">
       <DependentUpon>invoice-create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

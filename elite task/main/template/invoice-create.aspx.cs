@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,34 +20,35 @@ namespace elite_task.main.template
         {
 
         }
-        protected void Save_Bill(object sender, EventArgs e)
+
+        [WebMethod()]
+        public static void SaveToDb(string itemsList)
         {
+            // Deserialize the JSON data into a list of objects
+            var itemList = JsonConvert.DeserializeObject<List<BillItem>>(itemsList);
+
             string connectionString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                if(!(int.Parse(this.item1_quantity.Value) == 0))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    Save_item(this.item1_name.InnerHtml, int.Parse(this.item1_quantity.Value), decimal.Parse(this.item1_price.Value), connection);
-                    this.item1_quantity.Value = "0";
-                    this.item1_price.Value = "0";
+                    connection.Open();
+                    foreach (var item in itemList)
+                    {
+                        if (!(item.Quntity == 0))
+                        {
+                            Save_item(item.ItemName, item.Quntity, item.UnitPrice, connection);
+                        }
+                    }
                 }
-                if (!(int.Parse(this.item2_quantity.Value) == 0))
-                {
-                    Save_item(this.item2_name.InnerHtml, int.Parse(this.item2_quantity.Value), decimal.Parse(this.item2_price.Value), connection);
-                    this.item2_quantity.Value = "0";
-                    this.item2_price.Value = "0";
-                }
-                if (!(int.Parse(this.item3_quantity.Value) == 0))
-                {
-                    Save_item(this.item3_name.InnerHtml, int.Parse(this.item3_quantity.Value), decimal.Parse(this.item3_price.Value), connection);
-                    this.item3_quantity.Value = "0";
-                    this.item3_price.Value = "0";
-                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
-        protected void Save_item(string itemName, int quntity, decimal unitPrice, SqlConnection connection)
+        private static void Save_item(string itemName, int quntity, float unitPrice, SqlConnection connection)
         {
             string query = "insert into bill (Item_name,Quntity,Unit_price,Total) values (@Item_name,@Quntity,@Unit_price,@Total)";
 
@@ -55,7 +60,6 @@ namespace elite_task.main.template
                 command.Parameters.Add(new SqlParameter("@Total", SqlDbType.Decimal)).Value = quntity * unitPrice;
                 command.ExecuteNonQuery();
             }
-
         }
     }
 }

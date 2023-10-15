@@ -794,7 +794,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
 
-                                            <asp:button runat="server" id="save_bill" OnClick="Save_Bill" class="btn btn-primary btn-sl-lg mr-3" Text="Save bill in DB"/>
+                                            <button id="save_bill" OnClick="saveToDb()" class="btn btn-primary btn-sl-lg mr-3" type="button">Save bill in DB</button>
                                              <button class="btn btn-info " type="button">Delete selected rows</button>
                                         </div>
                                     </div>
@@ -820,44 +820,44 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" /></td>
-                                                            <td runat="server" id="item1_name" class="muted-text">item 1</td>
+                                                            <td  id="item1_name" class="muted-text">item 1</td>
 
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item1_quantity" style="text-align: center;" value="0" type="text">
+                                                                <input  id="item1_quantity" style="text-align: center;" value="0" type="text">
                                                             </td>
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item1_price" style="text-align: center;" value="0" type="text"></td>
+                                                                <input  id="item1_price" style="text-align: center;" value="0" type="text"></td>
                                                             <td class="text-primary"><span>0.00</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" /></td>
-                                                            <td runat="server" id="item2_name" class="muted-text">item 2</td>
+                                                            <td  id="item2_name" class="muted-text">item 2</td>
 
 
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item2_quantity" style="text-align: center;" value="0" type="text">
+                                                                <input  id="item2_quantity" style="text-align: center;" value="0" type="text">
                                                             </td>
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item2_price" style="text-align: center;" value="0" type="text"></td>
+                                                                <input  id="item2_price" style="text-align: center;" value="0" type="text"></td>
                                                             <td class="text-primary"><span>0.00</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" /></td>
-                                                            <td runat="server" id="item3_name" class="muted-text">item 3</td>
+                                                            <td  id="item3_name" class="muted-text">item 3</td>
 
 
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item3_quantity" style="text-align: center;" value="0" type="text">
+                                                                <input  id="item3_quantity" style="text-align: center;" value="0" type="text">
                                                             </td>
                                                             <td class="muted-text">
-                                                                <input runat="server" id="item3_price" style="text-align: center;" value="0" type="text"></td>
+                                                                <input  id="item3_price" style="text-align: center;" value="0" type="text"></td>
                                                             <td class="text-primary"><span>0.00</span></td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td></td>
+                                                            <td><button id="add_row" class="btn btn-info" type="button" >add row</button></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td>Net</td>
